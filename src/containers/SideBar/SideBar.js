@@ -77,7 +77,7 @@ const SideBar = props => {
       </div>
       <Divider />
       <List>
-        {["Create Blog", "Edit Profile", "View History"].map((text, index) => (
+        {["Create Blog"].map((text, index) => (
           <Link
             key={index}
             underline="none"
