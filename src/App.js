@@ -25,6 +25,7 @@ import { auth, signOut } from "./firebase";
 import { thunkSignIn, signInSuccesful } from "./actions/authActions";
 import PrivateRoute from "./routes/PrivateRoute";
 import Auth from "./containers/Auth/Auth";
+import CreateBlogs from "./containers/CreateBlogs/CreateBlogs";
 
 const drawerWidth = 240;
 const styles = (theme: Theme) =>
@@ -104,7 +105,7 @@ class App extends React.PureComponent {
                     path="/admin"
                     component={Auth}
                   />
-                  {/* <Route path="/createBlog" component={CreateBlog} /> */}
+                  <Route path="/createBlog" component={CreateBlogs} />
                 </Switch>
               </div>
               <Footer />

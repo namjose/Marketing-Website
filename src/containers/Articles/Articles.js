@@ -15,20 +15,23 @@ import {
   Paper,
   IconButton,
   Icon,
-  Link
+  Link,
+  Menu
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import imgA from "./assets/images/imgA.jpg";
 import threedots from "./assets/icons/threedots.svg";
 import "./index.scss";
 import { firestore, storage } from "../../firebase";
+import Blog from "./Blog";
+import mainImage from "./assets/images/mainImage.jpg";
 
 const array = [1, 2];
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundImage: `url(${process.env.PUBLIC_URL}/images/mainImage.jpg)`,
+      backgroundImage: `url(${mainImage})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
@@ -85,6 +88,8 @@ class Articles extends React.Component {
     };
   }
 
+  unsubscribeFromFirestore = null;
+
   componentDidMount = async () => {
     // storage
     //   .refFromURL(
@@ -93,19 +98,23 @@ class Articles extends React.Component {
     //   .getDownloadURL()
     //   .then(url => console.log(url));
 
-    const snapshot = await firestore
+    this.unsubscribeFromFirestore = firestore
       .collection("blogs")
       .orderBy("createdAt", "desc")
-      .get();
+      .onSnapshot(snapshot => {
+        const blogs = snapshot.docs.map(doc => {
+          return { id: doc.id, ...doc.data() };
+        });
+        this.setState({ blogs, isLoading: false });
+      });
+  };
 
-    const blogs = snapshot.docs.map(doc => {
-      const id = doc.id;
-      const data = doc.data();
+  componentWillUnmount = () => {
+    this.unsubscribeFromFirestore();
+  };
 
-      return { id, ...data };
-    });
-
-    this.setState({ blogs, isLoading: false });
+  _openMenu = () => {
+    return <Menu />;
   };
 
   _renderBlogs = () => {
@@ -115,81 +124,7 @@ class Articles extends React.Component {
       return <div>No blogs found</div>;
     } else {
       return blogs.map(item => {
-        return (
-          <div
-            style={{
-              marginBottom: 70,
-              boxShadow: "0 8px 20px rgba(0,0,0,.05)",
-              borderRadius: 4
-            }}
-          >
-            <img
-              src={item.photoURL}
-              style={{
-                height: "auto",
-                maxHeight: 600,
-                maxWidth: "100%",
-                borderRadius: "4px 4px 0 0"
-              }}
-            />
-            <div style={{ textAlign: "left", padding: 35 }}>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <div style={{ flex: 1 }}>
-                  <Typography className={classes.title}>
-                    {item.title}
-                  </Typography>
-                </div>
-                <a href={`/admin/editBlogs/${item.id}`}>
-                  <img src={threedots} alt="threedots" width={24} />
-                </a>
-              </div>
-              <br />
-              <Typography>{item.blog}</Typography>
-              <br />
-              <br />
-              <Divider />
-              <br />
-              <br />
-              <Grid container>
-                <Grid item xs={12} md={2}>
-                  <Typography className={classes.description}>
-                    {moment
-                      .unix(item.createdAt.seconds)
-                      .format("MMMM DD, YYYY")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} md={2}>
-                  <Typography className={classes.description}>
-                    KeyDesign
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  direction="row"
-                  style={{ display: "flex" }}
-                >
-                  {item.tag.map(text => {
-                    return (
-                      <div>
-                        <Typography className={classes.description}>
-                          {text}
-                        </Typography>
-                      </div>
-                    );
-                  })}
-                </Grid>
-                {/* <Grid item xs={12} md={2}>
-                  <Typography className={classes.description} align="right">
-                    3 comments
-                  </Typography>
-                </Grid> */}
-              </Grid>
-              <br />
-            </div>
-          </div>
-        );
+        return <Blog key={item.id} classes={classes} item={item} />;
       });
     }
   };

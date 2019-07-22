@@ -11,13 +11,15 @@ import {
 } from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { Spring } from "react-spring/renderprops";
+import homepage from "./images/homepage.jpg";
+import card1 from "./images/card1.jpg";
 
 const array = [1, 2, 3];
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundImage: `url(${process.env.PUBLIC_URL}/images/homepage.jpg)`,
+      backgroundImage: `url(${homepage})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
@@ -48,7 +50,7 @@ const styles = (theme: Theme) =>
     card: {
       display: "flex",
       margin: 10,
-      backgroundImage: `url(${process.env.PUBLIC_URL}/images/card1.jpg)`,
+      backgroundImage: `url(${card1})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
@@ -103,6 +105,9 @@ class Homepage extends React.Component {
               variant="contained"
               color="inherit"
               className={classes.button}
+              onClick={() => {
+                this.props.history.push("/articles");
+              }}
             >
               View Available Articles
             </Button>

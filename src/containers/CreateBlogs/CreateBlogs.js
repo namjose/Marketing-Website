@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import SlideDialog from "./SlideDialog";
 import { firestore } from "../../firebase";
+import mainImage from "./assets/images/mainImage.jpg";
 
 const MAX_WORDS = 500;
 const ITEM_HEIGHT = 48;
@@ -31,7 +32,7 @@ function getStyles(name, tag) {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundImage: `url(${process.env.PUBLIC_URL}/images/mainImage.jpg)`,
+      backgroundImage: `url(${mainImage})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",

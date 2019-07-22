@@ -77,7 +77,7 @@ const SideBar = props => {
       </div>
       <Divider />
       <List>
-        {["Create Blog", "Edit Content"].map((text, index) => (
+        {["Create Blog", "Edit Profile", "View History"].map((text, index) => (
           <Link
             key={index}
             underline="none"
@@ -94,14 +94,16 @@ const SideBar = props => {
         ))}
       </List>
       <Divider />
-      <div className={classes.drawerHeader}>
+      <div
+        className={classes.drawerHeader}
+        style={{ cursor: "pointer" }}
+        onClick={props._onSignOut}
+      >
         <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
           <Icon
-            className={classNames(classes.typography, "fas fa-user-circle")}
+            className={classNames(classes.typography, "fas fa-power-off")}
           />
-          <ButtonBase onClick={props._onSignOut}>
-            <Typography>Logout</Typography>
-          </ButtonBase>
+          <Typography style={{ fontWeight: "bold" }}>Sign out</Typography>
         </div>
       </div>
     </Drawer>
