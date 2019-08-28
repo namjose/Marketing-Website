@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import moment from "moment";
+import React from 'react'
+import classNames from 'classnames'
+import moment from 'moment'
 import {
   Grid,
   Typography,
@@ -17,28 +17,28 @@ import {
   Icon,
   Link,
   Menu
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import imgA from "./assets/images/imgA.jpg";
-import threedots from "./assets/icons/threedots.svg";
-import "./index.scss";
-import { firestore, storage } from "../../firebase";
-import Blog from "./Blog";
-import mainImage from "./assets/images/mainImage.jpg";
+} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+import imgA from './assets/images/imgA.jpg'
+import threedots from './assets/icons/threedots.svg'
+import './index.scss'
+import { firestore, storage } from '../../firebase'
+import Blog from './Blog'
+import mainImage from './assets/images/mainImage.jpg'
 
-const array = [1, 2];
+const array = [1, 2]
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       backgroundImage: `url(${mainImage})`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
       border: 0,
       borderRadius: 3,
-      color: "white",
-      padding: "100",
+      color: 'white',
+      padding: '100',
       height: 400
     },
     title: {
@@ -51,7 +51,7 @@ const styles = (theme: Theme) =>
     },
     item: {
       //   margin: "40px 0px",
-      padding: "0px 150px"
+      padding: '0px 150px'
     },
     button: {
       margin: 20,
@@ -59,12 +59,12 @@ const styles = (theme: Theme) =>
     },
     description: {
       fontWeight: 450,
-      color: "#333",
+      color: '#333',
       fontSize: 13,
       marginRight: theme.spacing(1)
     },
     divider: {
-      margin: "20px 0"
+      margin: '20px 0'
     },
     icon: {
       marginRight: 2
@@ -72,23 +72,23 @@ const styles = (theme: Theme) =>
     tag: {
       margin: theme.spacing(1),
       marginLeft: 0,
-      color: "#999"
+      color: '#999'
     },
     typography: {
-      fontWeight: "bold"
+      fontWeight: 'bold'
     }
-  });
+  })
 
 class Articles extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       blogs: [],
       isLoading: true
-    };
+    }
   }
 
-  unsubscribeFromFirestore = null;
+  unsubscribeFromFirestore = null
 
   componentDidMount = async () => {
     // storage
@@ -99,39 +99,39 @@ class Articles extends React.Component {
     //   .then(url => console.log(url));
 
     this.unsubscribeFromFirestore = firestore
-      .collection("blogs")
-      .orderBy("createdAt", "desc")
+      .collection('blogs')
+      .orderBy('createdAt', 'desc')
       .onSnapshot(snapshot => {
         const blogs = snapshot.docs.map(doc => {
-          return { id: doc.id, ...doc.data() };
-        });
-        this.setState({ blogs, isLoading: false });
-      });
-  };
+          return { id: doc.id, ...doc.data() }
+        })
+        this.setState({ blogs, isLoading: false })
+      })
+  }
 
   componentWillUnmount = () => {
-    this.unsubscribeFromFirestore();
-  };
+    this.unsubscribeFromFirestore()
+  }
 
   _openMenu = () => {
-    return <Menu />;
-  };
+    return <Menu />
+  }
 
   _renderBlogs = () => {
-    const { classes } = this.props;
-    const { blogs } = this.state;
+    const { classes } = this.props
+    const { blogs } = this.state
     if (blogs.length === 0) {
-      return <div>No blogs found</div>;
+      return <div>No blogs found</div>
     } else {
       return blogs.map(item => {
-        return <Blog key={item.id} classes={classes} item={item} />;
-      });
+        return <Blog key={item.id} classes={classes} item={item} />
+      })
     }
-  };
+  }
 
   render() {
-    const { classes } = this.props;
-    const { blogs, isLoading } = this.state;
+    const { classes } = this.props
+    const { blogs, isLoading } = this.state
     return (
       <div>
         <Grid
@@ -150,7 +150,7 @@ class Articles extends React.Component {
           </Grid>
         </Grid>
         <Grid
-          style={{ margin: "60px 0px", padding: "0px 150px" }}
+          style={{ margin: '60px 0px', padding: '0px 150px' }}
           container
           justify="center"
         >
@@ -160,7 +160,7 @@ class Articles extends React.Component {
             xs={9}
             direction="column"
             style={{
-              display: "flex"
+              display: 'flex'
             }}
           >
             {isLoading ? <div>Loading ...</div> : this._renderBlogs()}
@@ -171,9 +171,9 @@ class Articles extends React.Component {
             xs={3}
             direction="column"
             style={{
-              display: "flex",
+              display: 'flex',
               paddingLeft: 60,
-              textAlign: "left"
+              textAlign: 'left'
             }}
           >
             <div style={{ marginBottom: 40 }}>
@@ -181,13 +181,13 @@ class Articles extends React.Component {
               <Divider className={classes.divider} />
               <Paper
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: 'white',
                   borderRadius: 20,
-                  padding: "4px 4px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 5px 15px rgba(0,0,0,.05)"
+                  padding: '4px 4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 5px 15px rgba(0,0,0,.05)'
                 }}
               >
                 <InputBase
@@ -209,13 +209,13 @@ class Articles extends React.Component {
               <Divider className={classes.divider} />
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center"
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center'
                 }}
               >
                 <Icon
-                  className={classNames(classes.icon, "fas fa-chevron-right")}
+                  className={classNames(classes.icon, 'fas fa-chevron-right')}
                   style={{ fontSize: 10 }}
                 />
                 <Link href="#" underline="none">
@@ -226,13 +226,13 @@ class Articles extends React.Component {
               </div>
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center"
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center'
                 }}
               >
                 <Icon
-                  className={classNames(classes.icon, "fas fa-chevron-right")}
+                  className={classNames(classes.icon, 'fas fa-chevron-right')}
                   style={{ fontSize: 10 }}
                 />
                 <Link href="#" underline="none">
@@ -264,8 +264,8 @@ class Articles extends React.Component {
           </Grid>
         </Grid>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(Articles);
+export default withStyles(styles)(Articles)

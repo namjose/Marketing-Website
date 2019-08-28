@@ -1,0 +1,111 @@
+.container__style {
+  margin: 100px 0;
+  padding: 0 100px;
+}
+
+.typography {
+  margin: 20px 0;
+  &--title {
+    @extend .typography;
+    font-weight: bold;
+  }
+
+  &--sub {
+    @extend .typography;
+    color: "grey";
+    margin-bottom: 50px;
+  }
+}
+
+.card {
+  background-color: white;
+  //   height: 455;
+  //   width: 134;
+  p {
+    text-align: left;
+  }
+
+  &--centre {
+    @extend .card;
+    text-align: center;
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.card__border {
+  &--left {
+    border-left: 5px solid #eeeeee;
+    &:hover {
+      border-left: 5px solid #01b29e;
+    }
+  }
+
+  &--bottom {
+    border-bottom: 5px solid #eeeeee;
+    &:hover {
+      border-bottom: 5px solid #01b29e;
+    }
+  }
+}
+
+p,
+h5 {
+  text-align: center;
+}
+
+$facebook_color: #4f7dd4;
+$google_color: #dc422b;
+
+.icon__container {
+  padding: 10px 15px;
+  margin: 0px 5px;
+  cursor: pointer;
+
+  &--facebook {
+    @extend .icon__container;
+    border: 2px solid $facebook_color;
+    span {
+      color: $facebook_color;
+      font-size: 15px;
+    }
+    &:hover {
+      background-color: $facebook_color;
+      span {
+        color: #fff;
+        font-size: 15px;
+      }
+    }
+  }
+  &--google {
+    @extend .icon__container;
+    border: 2px solid $google_color;
+    span {
+      color: $google_color;
+      font-size: 15px;
+    }
+    &:hover {
+      background-color: $google_color;
+      span {
+        color: #fff;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.arrow-up {
+  position: absolute;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #fff;
+}
+
+.arrow-up__container {
+  display: flex;
+  justify-content: center;
+}

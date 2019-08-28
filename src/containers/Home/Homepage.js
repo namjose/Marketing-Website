@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Grid,
   Typography,
@@ -8,37 +8,38 @@ import {
   withStyles,
   Divider,
   Fab
-} from "@material-ui/core";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import { Spring } from "react-spring/renderprops";
-import homepage from "./images/homepage.jpg";
-import card1 from "./images/card1.jpg";
+} from '@material-ui/core'
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
+import { Spring } from 'react-spring/renderprops'
+import homepage from './images/homepage.jpg'
+import card1 from './images/card1.jpg'
+import './index.scss'
 
-const array = [1, 2, 3];
+const array = [1, 2, 3]
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       backgroundImage: `url(${homepage})`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
       border: 0,
       borderRadius: 3,
-      color: "white",
-      padding: "100",
+      color: 'white',
+      padding: '100',
       height: 500
     },
     typography: {
-      fontWeight: "bold"
+      fontWeight: 'bold'
     },
     textOnImage: {
-      fontWeight: "bold",
-      textShadow: "rgba(0, 0, 0, 0.4) 0px 10px 20px"
+      fontWeight: 'bold',
+      textShadow: 'rgba(0, 0, 0, 0.4) 0px 10px 20px'
     },
     item: {
-      margin: "40px 0px",
-      padding: "0px 150px"
+      margin: '40px 0px',
+      padding: '0px 150px'
     },
     button: {
       margin: 20,
@@ -48,33 +49,33 @@ const styles = (theme: Theme) =>
       fontWeight: 600
     },
     card: {
-      display: "flex",
+      display: 'flex',
       margin: 10,
       backgroundImage: `url(${card1})`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
       height: 340,
-      color: "white",
-      padding: "0px 30px",
+      color: 'white',
+      padding: '0px 30px',
       paddingBottom: 30,
-      alignItems: "flex-end",
+      alignItems: 'flex-end',
       borderRadius: 12
     },
     fab: {
       marginTop: -30,
-      boxShadow: "0 0 0 0",
-      border: "2px solid white"
+      boxShadow: '0 0 0 0',
+      border: '2px solid white'
     }
-  });
+  })
 
 class Homepage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   _renderObjectivePart = index => {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <Grid item xs={12} md={3} className={classes.card}>
         <div>
@@ -84,11 +85,11 @@ class Homepage extends React.Component {
           <Typography>We respect human beings opinions and choices</Typography>
         </div>
       </Grid>
-    );
-  };
+    )
+  }
 
   _renderIntro = () => {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <Spring from={{ marginLeft: -1000 }} to={{ marginLeft: 0 }}>
         {props => (
@@ -96,7 +97,7 @@ class Homepage extends React.Component {
             <Typography
               variant="h5"
               className={classes.typography}
-              align="left"
+              align="center"
             >
               We are fixing how people manage their social networks. So we have
               to find the right people to make
@@ -106,7 +107,7 @@ class Homepage extends React.Component {
               color="inherit"
               className={classes.button}
               onClick={() => {
-                this.props.history.push("/articles");
+                this.props.history.push('/articles')
               }}
             >
               View Available Articles
@@ -114,11 +115,11 @@ class Homepage extends React.Component {
           </Grid>
         )}
       </Spring>
-    );
-  };
+    )
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div>
         <Grid
@@ -138,7 +139,7 @@ class Homepage extends React.Component {
             window.scrollTo({
               top: 700,
               left: 0,
-              behavior: "smooth"
+              behavior: 'smooth'
             })
           }
           color="inherit"
@@ -146,7 +147,7 @@ class Homepage extends React.Component {
         >
           <ArrowDownwardIcon fontSize="inherit" />
         </Fab>
-        <Grid style={{ margin: "60px 0px" }} container justify="center">
+        <Grid style={{ margin: '60px 0px' }} container justify="center">
           <div>
             {this._renderIntro()}
             <Divider />
@@ -166,7 +167,7 @@ class Homepage extends React.Component {
                 <Typography variant="h3">Take a look at our intro</Typography>
                 <br />
                 <br />
-                <Typography style={{ padding: "0 200px" }}>
+                <Typography style={{ padding: '0 200px' }}>
                   Add your app screenshots below. Make sure to make them lively
                   by putting them inside real device mockups Replace this text
                   to describe the screenshots of your app.
@@ -182,8 +183,8 @@ class Homepage extends React.Component {
           </div>
         </Grid>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(Homepage);
+export default withStyles(styles)(Homepage)

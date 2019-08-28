@@ -199,7 +199,7 @@ class EditBlogs extends React.PureComponent {
         >
           <Grid item xs={12} className={classes.item}>
             <Typography variant="h4" className={classes.typography}>
-              Write Blog
+              Edit Blog
             </Typography>
           </Grid>
         </Grid>
@@ -222,7 +222,7 @@ class EditBlogs extends React.PureComponent {
           >
             <div style={{ textAlign: "left", padding: 35 }}>
               <form onSubmit={this._handleSubmit}>
-                <Typography className={classes.title}>Write Blog</Typography>
+                <Typography className={classes.title}>Edit Blog</Typography>
                 <br />
                 <TextField
                   label="Blog Title"
