@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { createBrowserHistory } from 'history'
-import { Theme, createStyles, withStyles, WithStyles } from '@material-ui/core'
+import { Theme, createStyles, withStyles, Icon } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import logo from './logo.svg'
 import './App.scss'
@@ -29,23 +29,24 @@ import CreateBlogs from './containers/CreateBlogs/CreateBlogs'
 import About from './containers/About/About'
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
 import { LanguageContextProvider } from './contexts/languageContext'
+import pallete from './assets/pallete'
 
 const theme = createMuiTheme({
   spacing: 8,
   palette: {
     primary: {
-      main: '#01b29e',
-      contrastText: '#fff'
+      main: pallete.primary_color
     },
     secondary: {
-      main: '#eeeeee'
+      main: '#f5f5f5'
     },
-    contrastThreshold: 3,
-    tonalOffset: 0.2,
     text: {
-      primary: '#000000',
-      secondary: '#fff'
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.6)'
     }
+  },
+  typography: {
+    fontFamily: 'Work Sans, Roboto'
   }
 })
 
@@ -71,12 +72,28 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      navBackground: false
     }
   }
 
+  navRef = React.createRef()
+
   componentDidMount = () => {
+    document.addEventListener('scroll', this.handleScroll)
+
     this.props.thunkSignIn()
+  }
+
+  componentWillUnmount = () => {
+    document.removeEventListener('scroll', this.handleScroll)
+  }
+
+  handleScroll = () => {
+    const show = window.scrollY > 120
+    if (this.navRef.current !== show) {
+      this.setState({ navBackground: show })
+    }
   }
 
   handleDrawerOpen = () => {
@@ -95,7 +112,7 @@ class App extends React.PureComponent {
   render() {
     const { classes, authState } = this.props
     const { loggedIn, user } = authState
-    const { open } = this.state
+    const { open, navBackground } = this.state
     return (
       <Router history={createBrowserHistory()}>
         <ThemeProvider theme={theme}>
@@ -114,6 +131,7 @@ class App extends React.PureComponent {
                 />
                 <Route>
                   <HeaderBar
+                    navBackground={navBackground}
                     user={user}
                     open={open}
                     handleDrawerOpen={this.handleDrawerOpen}

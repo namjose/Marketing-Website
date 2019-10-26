@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React from 'react'
+import classNames from 'classnames'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
   Drawer,
   List,
@@ -13,14 +13,16 @@ import {
   Typography,
   Icon,
   ButtonBase
-} from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { signOut } from "../../firebase";
+} from '@material-ui/core'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
 
-const drawerWidth = 240;
+import Create from '@material-ui/icons/Create'
+import MailIcon from '@material-ui/icons/Mail'
+import { signOut } from '../../firebase'
+
+const drawerWidth = 240
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
@@ -30,22 +32,22 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth
   },
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: "0 8px",
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 8px',
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end'
   },
   typography: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
   }
-}));
+}))
 
 const SideBar = props => {
-  const classes = useStyles();
-  const theme = useTheme();
-  const { open, handleDrawerClose, user } = props;
+  const classes = useStyles()
+  const theme = useTheme()
+  const { open, handleDrawerClose, user } = props
   return (
     <Drawer
       anchor="left"
@@ -58,17 +60,17 @@ const SideBar = props => {
     >
       <div className={classes.drawerHeader}>
         {user ? (
-          <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
             <Icon
-              className={classNames(classes.typography, "fas fa-user-circle")}
+              className={classNames(classes.typography, 'fas fa-user-circle')}
             />
-            <Typography style={{ fontWeight: "bold" }}>
-              {user.email.substring(0, user.email.indexOf("@"))}
+            <Typography style={{ fontWeight: 'bold' }}>
+              {user.email.substring(0, user.email.indexOf('@'))}
             </Typography>
           </div>
         ) : null}
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "ltr" ? (
+          {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
           ) : (
             <ChevronRightIcon />
@@ -77,7 +79,7 @@ const SideBar = props => {
       </div>
       <Divider />
       <List>
-        {["Create Blog"].map((text, index) => (
+        {['Create Blog'].map((text, index) => (
           <Link
             key={index}
             underline="none"
@@ -85,10 +87,10 @@ const SideBar = props => {
             color="inherit"
           >
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ListItemIcon style={{ minWidth: 0, marginRight: 8 }}>
+                <Create style={{ color: 'rgba(0, 0, 0, 0.87)' }} />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Typography style={{ fontWeight: 600 }}>Create Blog</Typography>
             </ListItem>
           </Link>
         ))}
@@ -96,18 +98,18 @@ const SideBar = props => {
       <Divider />
       <div
         className={classes.drawerHeader}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: 'pointer' }}
         onClick={props._onSignOut}
       >
-        <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
           <Icon
-            className={classNames(classes.typography, "fas fa-power-off")}
+            className={classNames(classes.typography, 'fas fa-power-off')}
           />
-          <Typography style={{ fontWeight: "bold" }}>Sign out</Typography>
+          <Typography style={{ fontWeight: 600 }}>Sign Out</Typography>
         </div>
       </div>
     </Drawer>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar

@@ -50,13 +50,14 @@ class Blog extends React.Component {
           boxShadow: '0 8px 20px rgba(0,0,0,.05)',
           borderRadius: 4
         }}
+        className="blog"
       >
         <img
           src={item.photoURL}
           style={{
             height: 'auto',
             maxHeight: 600,
-            maxWidth: '100%',
+            width: '100%',
             borderRadius: '4px 4px 0 0'
           }}
         />
@@ -79,9 +80,6 @@ class Blog extends React.Component {
               <Typography className={classes.description}>
                 {moment.unix(item.createdAt.seconds).format('MMMM DD, YYYY')}
               </Typography>
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <Typography className={classes.description}>KeyDesign</Typography>
             </Grid>
             <Grid
               item

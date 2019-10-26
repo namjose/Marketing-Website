@@ -1,4 +1,9 @@
-@import "../../assets/colors";
+@import '../../assets/colors';
+
+.blog-container {
+  margin: 40px 0px;
+  padding: 0px 40px;
+}
 
 .main_title {
   font-size: 2.125rem;
@@ -6,4 +11,36 @@
   color: $secondary_color;
   line-height: 1.17;
   letter-spacing: 0.00735em;
+}
+
+.search_container,
+.blog {
+  p {
+    text-align: left;
+  }
+}
+
+.search_container {
+  .custom-link {
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+    margin-right: 2px;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary_color;
+    }
+  }
+}
+
+.tag-button {
+  margin: 2px;
+  margin-left: 0px;
+  color: #999;
+
+  &:hover {
+    color: $primary_color;
+    background-color: #fff;
+  }
 }

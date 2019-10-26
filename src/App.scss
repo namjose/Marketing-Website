@@ -4,6 +4,14 @@ $primary-color: #fff;
   // text-align: center;
 }
 
+h2.section-heading {
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 27px;
+  letter-spacing: -1px;
+  max-width: 600px;
+}
+
 a {
   cursor: pointer;
 }

@@ -25,6 +25,7 @@ import './index.scss'
 import { firestore, storage } from '../../firebase'
 import Blog from './Blog'
 import mainImage from './assets/images/mainImage.jpg'
+import pallete from '../../assets/pallete'
 
 const array = [1, 2]
 
@@ -57,22 +58,11 @@ const styles = (theme: Theme) =>
       margin: 20,
       padding: 16
     },
-    description: {
-      fontWeight: 450,
-      color: '#333',
-      fontSize: 13,
-      marginRight: theme.spacing(1)
-    },
     divider: {
       margin: '20px 0'
     },
     icon: {
       marginRight: 2
-    },
-    tag: {
-      margin: theme.spacing(1),
-      marginLeft: 0,
-      color: '#999'
     },
     typography: {
       fontWeight: 'bold'
@@ -80,12 +70,24 @@ const styles = (theme: Theme) =>
   })
 
 class Articles extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      blogs: [],
-      isLoading: true
+  state = {
+    blogs: [],
+    searchBlogs: [],
+    isLoading: true,
+    searchText: ''
+  }
+
+  onInputChange = e => {
+    const { blogs } = this.state
+    const { name, value } = e.target
+    let searchBlogs = blogs.filter(
+      element =>
+        element.title.toLowerCase().indexOf(value.trim().toLowerCase()) > -1
+    )
+    if (!value) {
+      searchBlogs = blogs
     }
+    this.setState({ [name]: value, searchBlogs: searchBlogs })
   }
 
   unsubscribeFromFirestore = null
@@ -105,7 +107,7 @@ class Articles extends React.Component {
         const blogs = snapshot.docs.map(doc => {
           return { id: doc.id, ...doc.data() }
         })
-        this.setState({ blogs, isLoading: false })
+        this.setState({ blogs, searchBlogs: blogs, isLoading: false })
       })
   }
 
@@ -119,11 +121,11 @@ class Articles extends React.Component {
 
   _renderBlogs = () => {
     const { classes } = this.props
-    const { blogs } = this.state
-    if (blogs.length === 0) {
+    const { searchBlogs } = this.state
+    if (searchBlogs.length === 0) {
       return <div>No blogs found</div>
     } else {
-      return blogs.map(item => {
+      return searchBlogs.map(item => {
         return <Blog key={item.id} classes={classes} item={item} />
       })
     }
@@ -149,15 +151,12 @@ class Articles extends React.Component {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          style={{ margin: '60px 0px', padding: '0px 150px' }}
-          container
-          justify="center"
-        >
+        <Grid className="blog-container" container justify="space-between">
           <Grid
             container
             item
-            xs={9}
+            xs={12}
+            lg={8}
             direction="column"
             style={{
               display: 'flex'
@@ -168,13 +167,15 @@ class Articles extends React.Component {
           <Grid
             container
             item
-            xs={3}
+            xs={12}
+            lg={3}
             direction="column"
             style={{
               display: 'flex',
-              paddingLeft: 60,
+              // paddingLeft: 60,
               textAlign: 'left'
             }}
+            className="search_container"
           >
             <div style={{ marginBottom: 40 }}>
               <Typography className={classes.title__small}>SEARCH</Typography>
@@ -196,6 +197,9 @@ class Articles extends React.Component {
                     flex: 1,
                     paddingLeft: 20
                   }}
+                  name="searchText"
+                  value={this.state.searchText}
+                  onChange={this.onInputChange}
                 />
                 <IconButton className={classes.iconButton} aria-label="Search">
                   <SearchIcon style={{ fontSize: 16 }} />
@@ -213,52 +217,46 @@ class Articles extends React.Component {
                   flexDirection: 'row',
                   alignItems: 'center'
                 }}
+                className="custom-link"
               >
                 <Icon
                   className={classNames(classes.icon, 'fas fa-chevron-right')}
-                  style={{ fontSize: 10 }}
+                  style={{ fontSize: 10, marginRight: 10 }}
                 />
-                <Link href="#" underline="none">
-                  <Typography className={classes.description}>
-                    Future design concept
-                  </Typography>
-                </Link>
+                <Typography>Future design concept</Typography>
               </div>
+            </div>
+            <div style={{ marginBottom: 40 }}>
+              <Typography className={classes.title__small}>ARCHIVES</Typography>
+              <Divider className={classes.divider} />
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center'
                 }}
+                className="custom-link"
               >
                 <Icon
                   className={classNames(classes.icon, 'fas fa-chevron-right')}
-                  style={{ fontSize: 10 }}
+                  style={{ fontSize: 10, marginRight: 10 }}
                 />
-                <Link href="#" underline="none">
-                  <Typography className={classes.description}>
-                    Future design concept
-                  </Typography>
-                </Link>
+                <Typography>February 2016</Typography>
               </div>
-            </div>
-            <div style={{ marginBottom: 40 }}>
-              <Typography className={classes.title__small}>ARCHIVES</Typography>
-              <Divider className={classes.divider} />
             </div>
             <div style={{ marginBottom: 40 }}>
               <Typography className={classes.title__small}>TAGS</Typography>
               <Divider className={classes.divider} />
               <div style={{}}>
-                <Button className={classes.tag} variant="outlined">
-                  DEVELOPMENT
-                </Button>
-                <Button className={classes.tag} variant="outlined">
-                  STUDY
-                </Button>
-                <Button className={classes.tag} variant="outlined">
-                  GAME
-                </Button>
+                {tags.map(tag => (
+                  <Button
+                    className="tag-button"
+                    variant="outlined"
+                    color="inherit"
+                  >
+                    {tag}
+                  </Button>
+                ))}
               </div>
             </div>
           </Grid>
@@ -269,3 +267,5 @@ class Articles extends React.Component {
 }
 
 export default withStyles(styles)(Articles)
+
+const tags = ['Development', 'Game', 'Technology', 'Study']

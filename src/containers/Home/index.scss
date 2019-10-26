@@ -1,3 +1,251 @@
+@import '../../assets/colors';
+
 body {
   text-align: center;
+}
+
+.fab-custom {
+  margin-top: -30px;
+  box-shadow: 0 0 0 0;
+  border: 2px solid white;
+  background-color: #0b35ef;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0b35ef;
+  }
+}
+
+.service-heading {
+  text-transform: none;
+  font-size: 18px;
+  margin-top: 0;
+  font-weight: 700;
+  line-height: 22px;
+  margin-bottom: 10px;
+}
+
+.main_heading {
+  font-weight: 600;
+  text-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 3rem;
+  }
+}
+
+.custom-button {
+  border-radius: 25px;
+  background-color: white;
+  color: $primary_color;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 48px;
+  padding: 0px 40px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px 0px;
+  // border: 2px solid $primary_color;
+
+  &:hover {
+    color: $hover_text_color;
+    background-color: white;
+  }
+}
+
+.section {
+  padding: 150px 0;
+  position: relative;
+  overflow: hidden;
+
+  .section-subheading {
+    margin: auto;
+    margin-bottom: 50px;
+    text-transform: none;
+    text-align: center;
+    margin-top: 25px;
+    max-width: 800px;
+  }
+}
+
+.slide {
+  height: 716px;
+  display: flex;
+  background-color: $primary_color;
+  color: #fff;
+  background-image: url('https://www.keydesign-themes.com/incubator/startup/wp-content/uploads/sites/6/2016/05/parallax-quote.jpg');
+  background-size: cover !important;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+}
+
+.titleWrapper {
+  flex: 1;
+  flex-wrap: inherit;
+  flex-direction: column;
+  // padding: 0px 152px;
+}
+
+.container {
+  padding: 0px 20px;
+
+  h2 {
+    font-size: 40px;
+  }
+}
+
+.column_inner {
+  padding: 0px 15px;
+  margin: 20px 0px;
+}
+
+.iconbox-customimg {
+  font-size: 35px;
+  width: 100px;
+  height: 100px;
+  line-height: 105px;
+  border-radius: 90px;
+  margin: auto;
+  position: relative;
+  margin-bottom: 35px;
+  background-color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  text-align: center;
+
+  img {
+    position: absolute;
+    left: 50%;
+    margin-left: -22px;
+    max-width: 45px;
+    top: 50%;
+    margin-top: -21px;
+    height: auto;
+  }
+}
+
+.team-member {
+  text-align: center;
+  position: relative;
+  .team-content {
+    padding: 0;
+    position: relative;
+    z-index: 100;
+    margin: 0px 50px;
+    // margin-top: 0;
+    // margin-bottom: 50px;
+
+    h5 {
+      margin-top: 5;
+      margin-bottom: 0;
+    }
+
+    .team-subtitle {
+      margin-bottom: 80px;
+      // display: block;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1;
+      color: inherit;
+    }
+
+    .team-image {
+      width: 190px;
+      height: 190px;
+      overflow: hidden;
+      margin: auto;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      border-radius: 90px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+
+      .team-content-hover {
+        visibility: hidden;
+        background-color: $primary_color;
+        top: 0;
+        position: absolute;
+        width: 190px;
+        max-height: 190px;
+        overflow: hidden;
+        height: auto;
+        opacity: 0.5;
+        -webkit-transition: 0.25s ease-in;
+        -o-transition: 0.25s ease-in;
+        transition: 0.25s ease-in;
+        z-index: 100;
+        border-radius: 90px;
+        color: white;
+
+        .team-subtitle {
+          color: #fff;
+          position: relative;
+        }
+
+        p {
+          color: #fff;
+          opacity: 0;
+          font-size: 8px;
+          font-weight: 400;
+          line-height: 22px;
+          position: relative;
+          font-size: 12px;
+          -webkit-transition: 0.25s ease-in;
+          -o-transition: 0.25s ease-in;
+          transition: 0.25s ease-in;
+        }
+      }
+
+      &:hover {
+        .team-content-hover {
+          opacity: 1;
+          visibility: visible;
+          padding: 40px 35px;
+          margin-left: calc(60px - 50%);
+          margin-top: -50px;
+          max-height: 400px;
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+
+          h5 {
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+          }
+
+          p {
+            opacity: 1;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.with-overlay {
+  // background-color: $primary_color;
+}
+
+.quote-container {
+  color: #fff;
+}
+
+.parallax {
+  position: relative;
+  overflow: hidden;
+
+  .parallax-overlay {
+    background-image: url('https://www.keydesign-themes.com/incubator/startup/wp-content/uploads/sites/6/2016/05/parallax-quote.jpg');
+    transform: translate3d(0px, -59.9926px, 0px);
+    background-size: cover !important;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-color: $primary_color;
+    height: 130%;
+    width: 100%;
+    position: absolute;
+    background-blend-mode: overlay;
+    top: 0;
+    opacity: 1;
+  }
 }

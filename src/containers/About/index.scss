@@ -1,6 +1,8 @@
+@import '../../assets/colors';
+
 .container__style {
   margin: 100px 0;
-  padding: 0 100px;
+  padding: 0px 40px;
 }
 
 .typography {
@@ -12,7 +14,7 @@
 
   &--sub {
     @extend .typography;
-    color: "grey";
+    color: 'grey';
     margin-bottom: 50px;
   }
 }
@@ -38,14 +40,14 @@
   &--left {
     border-left: 5px solid #eeeeee;
     &:hover {
-      border-left: 5px solid #01b29e;
+      border-left: 5px solid $primary_color;
     }
   }
 
   &--bottom {
     border-bottom: 5px solid #eeeeee;
     &:hover {
-      border-bottom: 5px solid #01b29e;
+      border-bottom: 5px solid $primary_color;
     }
   }
 }
@@ -62,6 +64,10 @@ $google_color: #dc422b;
   padding: 10px 15px;
   margin: 0px 5px;
   cursor: pointer;
+
+  // .fab {
+  //   background-color: white !important;
+  // }
 
   &--facebook {
     @extend .icon__container;

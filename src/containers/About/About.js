@@ -17,20 +17,18 @@ import {
   Icon
 } from '@material-ui/core'
 import classNames from 'classnames'
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
-import { Spring } from 'react-spring/renderprops'
-import homepage from './images/homepage.jpg'
 import about from './images/about.jpg'
 import './index.scss'
-
-const array = [1, 2, 3]
+import pallete from '../../assets/pallete'
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundImage: `url(${about})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundPosition: '25%',
+    backgroundBlendMode: 'overlay',
+    backgroundColor: pallete.black_overlay_color,
     border: 0,
     borderRadius: 3,
     color: 'white',
@@ -81,8 +79,8 @@ const About = props => {
         alignItems="center"
       >
         <Grid item xs={12} className={classes.item}>
-          <Typography variant="h2" className={classes.textOnImage}>
-            ABOUT US
+          <Typography variant="h3" className={classes.textOnImage}>
+            About Us
           </Typography>
         </Grid>
       </Grid>
@@ -212,10 +210,16 @@ const About = props => {
                   <CardActions>
                     <Grid container justify="center" alignItems="center">
                       <div class="icon__container--facebook">
-                        <Icon className={classNames('fab fa-facebook-f')} />
+                        <Icon
+                          color="inherit"
+                          className={classNames('fab fa-facebook-f')}
+                        />
                       </div>
                       <div class="icon__container--google">
-                        <Icon className={classNames('fab fa-google')} />
+                        <Icon
+                          color="inherit"
+                          className={classNames('fab fa-google')}
+                        />
                       </div>
                     </Grid>
                   </CardActions>
